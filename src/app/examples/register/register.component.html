@@ -1,0 +1,83 @@
+<div class="wrapper">
+    <div class="page-header" style="background-image: url('./assets/img/login-image.jpg');">
+        <div class="filter"></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-4 col-sm-6 mr-auto ml-auto">
+                      <div class="card card-register">
+                          <h3 class="title">Register</h3>
+                          <div class="social-line text-center">
+                              <a href="#pablo" class="btn btn-neutral btn-facebook btn-just-icon">
+                                  <i class="fa fa-facebook-square"></i>
+                              </a>
+                              <a href="#pablo" class="btn btn-neutral btn-google btn-just-icon">
+                                  <i class="fa fa-google-plus"></i>
+                              </a>
+                              <a href="#pablo" class="btn btn-neutral btn-twitter btn-just-icon">
+                                  <i class="fa fa-twitter"></i>
+                              </a>
+                          </div>
+                          <form class="register-form" (ngSubmit)="onSubmit()" #userForm="ngForm">
+                              <label for="name">Name</label>
+                              <div class="input-group form-group-no-border">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                      <i class="nc-icon nc-email-85"></i>
+                                  </span>
+                                </div>
+                                  <input type="text" [(ngModel)]="user.username"
+                                  class="form-control"
+                                  id="name"
+                                  name="name"
+                                  placeholder="Enter your name"
+                                  required #name="ngModel">
+                              </div>
+                              <div class="form-control" [hidden]="!name.pristine" class="alert alert-danger">Name is required</div>
+
+
+                              <label for="email">Email</label>
+                              <div class="input-group form-group-no-border">
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                      <i class="nc-icon nc-email-85"></i>
+                                  </span>
+                                </div>
+
+                                  <input type="email" [(ngModel)]="user.email"
+                                  class="form-control"
+                                  id="email"
+                                  name="email"
+                                  placeholder="Enter your email address"
+                                  required #email="ngModel">
+                                <div [hidden]="!email.pristine" class="alert alert-danger">Email is required</div>
+                              </div>
+
+                              <label for="pass">Password</label>
+                              <div class="input-group form-group-no-border" >
+                                <div class="input-group-prepend">
+                                  <span class="input-group-text">
+                                      <i class="nc-icon nc-key-25"></i>
+                                  </span>
+                                </div>
+                                  <input type="password" class="form-control"[(ngModel)]="user.pass"
+                                  class="form-control"
+                                  id="pass"
+                                  name="pass"
+                                  placeholder="Enter your password"
+                                  required #pass="ngModel">
+                                <div [hidden]="!pass.pristine" class="alert alert-danger">Password is required</div>
+                              </div>
+                              <button type="submit" [disabled]="!userForm.form.valid" class="btn btn-danger btn-block btn-round">Register</button>
+                          </form>
+                          <div class="forgot">
+                              <a href="#" class="btn btn-link btn-danger">Forgot password?</a>
+                          </div>
+                      </div>
+                    </div>
+                </div>
+                <div class="footer register-footer text-center">
+                    <h6>&copy; made with <i class="fa fa-heart heart"></i> by Creative Tim</h6>
+                </div>
+            </div>
+    </div>
+</div>

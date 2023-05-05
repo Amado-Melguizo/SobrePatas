@@ -9,6 +9,7 @@
       "projectType": "application",
       "architect": {
         "build": {
+          "defaultConfiguration": "production",
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist",
@@ -29,6 +30,14 @@
             "scripts": []
           },
           "configurations": {
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            },
             "production": {
               "optimization": true,
               "outputHashing": "all",
@@ -49,11 +58,15 @@
           }
         },
         "serve": {
+          "defaultConfiguration": "development",
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "browserTarget": "pk2-angular:build"
           },
           "configurations": {
+            "development": {
+              "browserTarget": "pk2-angular:build:development"
+             },
             "production": {
               "browserTarget": "pk2-angular:build:production"
             }
