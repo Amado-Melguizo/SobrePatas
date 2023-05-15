@@ -23,8 +23,8 @@
             <br/>
             <div class="nav-tabs-navigation">
                 <div class="nav-tabs-wrapper">
-                    <ngb-tabset [justify]="'center'">
-                        <ngb-tab title="Follows">
+                    <!-- <ngb-tabset [justify]="'center'">
+                        <ngb-tab title="Follows"> -->
                             <ng-template ngbTabContent >
                                 <div class="row following" id="follows">
                                     <div class="col-md-6 ml-auto mr-auto">
@@ -70,15 +70,11 @@
                                     </div>
                                 </div>
                             </ng-template>
-                        </ngb-tab>
-                        <ngb-tab title="Following">
                             <ng-template ngbTabContent>
                                 <h3 class="text-muted">Not following anyone yet :(</h3>
                                 <br>
                                 <button class="btn btn-warning btn-round">Find artists</button>
                             </ng-template>
-                        </ngb-tab>
-                    </ngb-tabset>
                 </div>
             </div>
         </div>

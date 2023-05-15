@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
 import { User } from "../user";
-import { UserService } from "../user-service.service";
+import { Router } from "@angular/router";
+import { AuthService } from "../user-service.service";
 
 @Component({
   selector: "app-register",
@@ -11,11 +11,11 @@ import { UserService } from "../user-service.service";
 export class RegisterComponent implements OnInit {
   user: User;
 
-  constructor(private router: Router, private userService: UserService) {
+  constructor(private router: Router, private userService: AuthService) {
     this.user = new User();
   }
   onSubmit() {
-    this.userService.save(this.user).subscribe((result) => this.gotoUserList());
+    //this.userService.save(this.user).subscribe((result) => this.gotoUserList());
   }
 
   gotoUserList() {

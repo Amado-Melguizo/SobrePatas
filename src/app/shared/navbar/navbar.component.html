@@ -33,8 +33,10 @@
                 </li>
 
                 <li class="nav-item " *ngIf="!isDocumentation()">
-                    <a class="navbar-brand" href="/register">About Us</a>
-
+                    <!-- <a class="navbar-brand" [routerLink]="['/user-profile']">Buenas, {{authService.usuario.username}}</a> -->
+                    <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <!-- {{user.username}} -->
+                      </a>
                 </li>
             </ul>
         </div>
