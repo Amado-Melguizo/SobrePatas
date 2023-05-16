@@ -41,6 +41,7 @@ export class SignupComponent implements OnInit {
         let usuario = this.authService.usuario;
         this.router.navigate(['/clientes']);
         Swal.fire('Login', `Hola ${usuario.username}, has iniciado sesión con éxito!`, 'success');
+        this.router.navigate(['/']);
       }, err => {
         if (err.status == 400) {
           Swal.fire('Error Login', 'Usuario o clave incorrectas!', 'error');

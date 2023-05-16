@@ -15,7 +15,7 @@ const routes: Routes =[
     { path: 'signup',           component: SignupComponent},
     { path: 'register',         component: RegisterComponent },
     { path: 'forgotPassword',   component: ForgotPasswordComponent },
-    { path: 'landing',          component: LandingComponent },
+    { path: 'settings',          component: LandingComponent },
 ];
 
 @NgModule({

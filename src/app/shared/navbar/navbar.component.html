@@ -27,16 +27,17 @@
                             <a [routerLink]="['/user-profile']" class="dropdown-item">Profile</a>
                             <a [routerLink]="['/settings']" class="dropdown-item">Settings</a>
                             <!-- ¿que hago aqui? -->
-                            <a [routerLink]="['/logOut']" class="dropdown-item">Log Out</a>
+                            <a (click)="logout()" class="dropdown-item">Log Out</a>
                         </div>
                     </div>
                 </li>
-
-                <li class="nav-item " *ngIf="!isDocumentation()">
-                    <!-- <a class="navbar-brand" [routerLink]="['/user-profile']">Buenas, {{authService.usuario.username}}</a> -->
-                    <a class="btn btn-outline-primary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <!-- {{user.username}} -->
-                      </a>
+                <li >
+                    <a *ngIf="authService.isAuthenticated()" class="btn btn-outline-primary" [routerLink]="['/user-profile']" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false">
+                      {{authService.usuario.username}}
+                    </a>
+                    <a *ngIf="!authService.isAuthenticated()" class="btn btn-outline-primary" [routerLink]="['/signup']" role="button" id="dropdownMenuLink" aria-haspopup="true" aria-expanded="false">
+                      No estas conectad@
+                    </a>
                 </li>
             </ul>
         </div>

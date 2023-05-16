@@ -1,5 +1,8 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { Component, ElementRef, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from 'app/examples/user-service.service';
+import Swal from 'sweetalert2';
 
 @Component({
     selector: 'app-navbar',
@@ -10,7 +13,7 @@ export class NavbarComponent implements OnInit {
     private toggleButton: any;
     private sidebarVisible: boolean;
 
-    constructor(public location: Location, private element : ElementRef) {
+    constructor(public authService: AuthService,private router: Router,public location: Location, private element : ElementRef) {
         this.sidebarVisible = false;
     }
 
@@ -71,4 +74,10 @@ export class NavbarComponent implements OnInit {
             return false;
         }
     }
+    logout(): void {
+        let username = this.authService.usuario.username;
+        this.authService.logout();
+        Swal.fire('Logout', `Hola ${username}, has cerrado sesión con éxito!`, 'success');
+        this.router.navigate(['/login']);
+      }
 }
