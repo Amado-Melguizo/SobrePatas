@@ -1,38 +1,103 @@
-import { AppComponent } from './app.component';
-import { NavbarComponent } from './shared/navbar/navbar.component';
-import { FooterComponent } from './shared/footer/footer.component';
+import { BrowserModule } from "@angular/platform-browser";
+import { NgModule, LOCALE_ID } from "@angular/core";
+import { AppComponent } from "./app.component";
+import { HeaderComponent } from "./header/header.component";
+import { FooterComponent } from "./footer/footer.component";
+import { ClientesComponent } from "./clientes/clientes.component";
+import { FormComponent } from "./clientes/form.component";
+import { PaginatorComponent } from "./paginator/paginator.component";
+import { ClienteService } from "./clientes/cliente.service";
+import { RouterModule, Routes } from "@angular/router";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
-import { RegisterComponent } from './examples/register/register.component';
-import { AuthService } from './examples/user-service.service';
-import { NgModule } from '@angular/core';
+import { registerLocaleData } from "@angular/common";
+import localeES from "@angular/common/locales/es";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AppRoutingModule } from './app.routing';
-import { ComponentsModule } from './components/components.module';
-import { ExamplesModule } from './examples/examples.module';
+import { MatDatepickerModule } from "@angular/material";
+import { MatMomentDateModule } from "@angular/material-moment-adapter";
+import { DetalleComponent } from "./clientes/detalle/detalle.component";
+import { LoginComponent } from "./usuarios/login.component";
+import { AuthGuard } from "./usuarios/guards/auth.guard";
+import { RoleGuard } from "./usuarios/guards/role.guard";
+import { TokenInterceptor } from "./usuarios/interceptors/token.interceptor";
+import { AuthInterceptor } from "./usuarios/interceptors/auth.interceptor";
+import { DetalleFacturaComponent } from "./facturas/detalle-factura.component";
+import { FacturasComponent } from "./facturas/facturas.component";
+
+import { MatAutocompleteModule } from "@angular/material/autocomplete";
+import { MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { DirectivaComponent } from "./directiva/directiva.component";
+
+registerLocaleData(localeES, "es");
+
+const routes: Routes = [
+  { path: "", redirectTo: "/home", pathMatch: "full" },
+  { path: "home", component: DirectivaComponent },
+  { path: "clientes", component: ClientesComponent },
+  { path: "clientes/page/:page", component: ClientesComponent },
+  {
+    path: "clientes/form",
+    component: FormComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { role: "ROLE_ADMIN" },
+  },
+  {
+    path: "clientes/form/:id",
+    component: FormComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { role: "ROLE_ADMIN" },
+  },
+  { path: "login", component: LoginComponent },
+  {
+    path: "facturas/:id",
+    component: DetalleFacturaComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { role: "ROLE_USER" },
+  },
+  {
+    path: "facturas/form/:clienteId",
+    component: FacturasComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { role: "ROLE_ADMIN" },
+  },
+];
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
+    HeaderComponent,
     FooterComponent,
-    RegisterComponent
+    ClientesComponent,
+    DirectivaComponent,
+    FormComponent,
+    PaginatorComponent,
+    DetalleComponent,
+    LoginComponent,
+    DetalleFacturaComponent,
+    FacturasComponent,
   ],
   imports: [
     BrowserModule,
-    NgbModule,
+    HttpClientModule,
     FormsModule,
-    RouterModule,
-    ComponentsModule,
-    ExamplesModule,
-    AppRoutingModule,
-    HttpClientModule
+    RouterModule.forRoot(routes),
+    BrowserAnimationsModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
+    ReactiveFormsModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    MatFormFieldModule
   ],
-  providers: [AuthService],
-  bootstrap: [AppComponent]
+  providers: [
+    ClienteService,
+    { provide: LOCALE_ID, useValue: "es" },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

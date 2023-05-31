@@ -7,7 +7,6 @@
 
 # dependencies
 /node_modules
-package-lock.json
 
 # IDEs and editors
 /.idea
@@ -33,7 +32,6 @@ package-lock.json
 npm-debug.log
 testem.log
 /typings
-/.angular
 
 # e2e
 /e2e/*.js
